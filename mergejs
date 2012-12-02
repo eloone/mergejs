@@ -1,0 +1,77 @@
+#!/bin/bash
+
+header(){
+	separator='\n/*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */\n';
+
+	echo -e '\n'$separator'/* '$1' */'$separator'\n'; 	
+}
+
+merge_files () {
+	if [ ! -f $1 ]; then
+		echo '[ERROR]' $1 'is not a regular file. It must be a text file.';
+	else
+		files=`cat $1`;
+		merge_file=$2;			
+
+			if [ -f $merge_file ] ; then
+				rm $merge_file;
+			fi
+
+			header 'Merging js from "'$1'" begins' >> $merge_file;
+			echo -e '/* Last merge :' $(date) ' */\n' >> $merge_file;	
+			echo -e '/* Merging order :\n' >> $merge_file;
+			for file in $files
+			do
+				if [ ${file:0:1} != '#' ]; then			
+					echo -e '\a- '$file >> $merge_file;
+				fi
+			done
+				echo -e '\n*/' >> $merge_file;
+
+			for file in $files
+			do
+				if [ ${file:0:1} != '#' ]; then		
+					header 'Merging js: '$file' begins' >> $merge_file;		
+					cat $file >> $merge_file;
+				fi
+			done
+
+		echo '[MERGE SUCCESS] The files listed in "'$1'" have been successfully merged into "'$2'"';
+	fi
+
+}
+
+compress_file(){
+IN=$1;
+OUT=${IN/%.js/-min.js};
+
+if [ $# == 2 ]; then
+	OUT=$2;
+fi
+
+echo '[STARTING COMPRESSION...] "'${IN}'" is being compressed into "'${OUT}'"';
+curl -o $OUT -d "compilation_level=WHITESPACE_ONLY&output_format=text&output_info=compiled_code" --data-urlencode "js_code@${IN}" "http://closure-compiler.appspot.com/compile"
+echo '[COMPRESSION OK]';
+
+}
+
+#START
+if [ $# -lt 2 ]; then
+    echo '';
+    echo '[HELP]';
+    echo 'Merges several javascript files listed in an input text file into an output file.';
+    echo '     - Correct syntax is' $0 'input_list_file merge_file';
+    echo '     - Or' $0 '-c input_list_file merge_file to also compress merge_file into merge_file-min.js';
+    echo '     - Or' $0 '-c input_list_file merge_file compressed_file to compress merge_file into compressed_file.';
+    echo '';
+else
+	if [ $1 = "-c" ]; then
+		shift
+		merge_files $1 $2;
+		compress_file $2 $3;
+	else
+		merge_files $1 $2;
+	fi	
+fi
+
+
