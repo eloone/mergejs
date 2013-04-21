@@ -25,7 +25,7 @@
 ## Installation
 
 1.  [download](https://github.com/eloone/mergejs/archive/master.zip) the script.
-2.  put the `mergejs` file dowloaded in a directory included in your $PATH, for example in `/usr/local/bin`
+2.  put the `mergejs` file downloaded in a directory included in your $PATH, for example in `/usr/local/bin`
 3. typing `mergejs` in your terminal should print out the help with the commands to run
 
 ## Default usage
