@@ -3,7 +3,7 @@
   Simple command line shell script to merge and compress your javascript files in a single file. It uses the [Closure compiler of Google](http://closure-compiler.appspot.com/) to compress the javascript.
 
 ## Pitch 
-  When you develop in javascript, it's more convenient to write your code in several files to keep things clean and modular. Yet when you release your app to production, it's better to merge and minify those files together in a single file to reduce the http requests and optimize your page load time. This script allows you to do just that in a very simple way. 
+  When you develop in javascript, it's more convenient to write your code in several files to keep things clean and modular. Yet when you release your app to production, it's better to merge and minify those files together in a single file to reduce the http requests and optimize your page load time. This script allows you to do just that in a very simple way. It's perfect for a simple website.
   
   Here's how it works :
   
@@ -111,6 +111,8 @@ If you specify the paths to the files in your conf file, you don't need to be in
 ## Notes
 
 This script was specifically designed for js files, but you can easily tweak it to merge other types of files. It's the equivalent to copy pasting the content of files into a merged file. So you can fork it and tweak it for your needs to merge all kinds of files.
+
+This script is not destined to evolve into a package manager. Its purpose is really just to merge files. However it could be integrated into a package manager as just a component.
 
 The settings for the compression done by Google's compiler are set to `Simple`. In you need other settings, you can easily change it in the script itself.
     
