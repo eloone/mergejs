@@ -16,8 +16,8 @@
 
 ## Features
 
-* List the js files to merge in order in a merging conf file
-* Comment out a file that should not be merged, yet you want to keep it in the merging conf file
+* List the js files to merge in order in a simple text file
+* Comment out a file that should not be merged, yet you want to keep it in the list text file
 * Specify the name of the merged file
 * [option] Minify the resulting merged file
 * [option] Specify the name of the minified file
@@ -31,15 +31,15 @@
 
 ## Default usage
 
-1. in your js folder containing the js files you want to merge create a simple text file named as you wish, for example `merge_conf.txt`. Your js directory could look like this :
+1. in your js folder containing the js files you want to merge create a simple text file named as you wish, for example `js_files_list.txt`. Your js directory could look like this :
 
 		js/                --> your js files
 			file1.js
       		file2.js
       		file3.js
-      		merge_conf.txt
+      		js_files_list.txt
             
-2. in `merge_conf.txt` list the names of the js files you want to merge, one per line, in the order you want to merge them. Your `merge_conf.txt` could look like this :
+2. in `js_files_list.txt` list the names of the js files you want to merge, one per line, in the order you want to merge them. Your `js_files_list.txt` could look like this :
 
 		file1.js
 		file3.js
@@ -47,14 +47,14 @@
         
 3. in your terminal, `cd` to the js folder and run this command :
 
-		$ mergejs merge_conf.txt merged_files.js
+		$ mergejs js_files_list.txt merged_files.js
 
-    Now the js files you listed in `merge_conf.txt` are merged in the order you specified into `merged_files.js`
+    Now the js files you listed in `js_files_list.txt` are merged in the order you specified into `merged_files.js`
 
 4. The output file `merged_files.js` would look like this :
 
 		/*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-		/* Merging js from "merge_conf.txt" begins */
+		/* Merging js from "js_files_list.txt" begins */
 		/*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 		/* Last merge : Fri Feb 22 11:25:37 CET 2013  */
@@ -83,22 +83,22 @@
 
 ## Usage examples
 
-Merge and <b>compress</b> the js files specified in `merge_conf.txt` into `merged_files.js` :
+Merge and <b>compress</b> the js files specified in `js_files_list.txt` into `merged_files.js` :
 	
-    $ mergejs -c merge_conf.txt merged_files.js
+    $ mergejs -c js_files_list.txt merged_files.js
     
 This will merge the js files into `merged_files.js` and then minify `merged_files.js` into `merged_files-min.js`
 
 ---
 
-Merge the js files specified in `merge_conf.txt` into `merged_files.js` and compress `merged_files.js` into `my_compressed_file.js`
+Merge the js files specified in `js_files_list.txt` into `merged_files.js` and compress `merged_files.js` into `my_compressed_file.js`
 
-	$ mergejs -c merge_conf.txt merged_files.js custom_compressed_file.js
+	$ mergejs -c js_files_list.txt merged_files.js my_compressed_file.js
 <br/>
 
 ---
 
-Comment a file that should not be merged in `merge_conf.txt` :
+Comment a file that should not be merged in `js_files_list.txt` :
 
 	file1.js
     #file2.js --> this file will not be merged 
@@ -107,7 +107,7 @@ Comment a file that should not be merged in `merge_conf.txt` :
   
 ---
 
-If you specify the paths to the files in your conf file, you don't need to be in the js folder when you run the command. You can chose how you would like to use the script depending on your needs, the script only needs to find the files you specify in the conf file.
+If you specify the paths to the files in your list text file, you don't need to be in the js folder when you run the command. You can chose how you would like to use the script depending on your needs, the script only needs to find the files you specify in your list.
 
 ## Notes
 
