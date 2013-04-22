@@ -18,8 +18,9 @@
 
 * List the js files to merge in order in a merging conf file
 * Comment out a file that should not be merged, yet you want to keep it in the merging conf file
-* Minify the files or not
-* Specify the names of the merged and minified files
+* Specify the name of the merged file
+* [option] Minify the resulting merged file
+* [option] Specify the name of the minified file
 * Several merging conf files will result in several merged files
 
 ## Installation
