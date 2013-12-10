@@ -30,9 +30,11 @@ merge_files () {
 
 			for file in $files
 			do
-				if [ ${file:0:1} != '#' ]; then		
-					header 'Merging js: '$file' begins' >> $merge_file;		
-					cat $file >> $merge_file;
+				if [ ${file:0:1} != '#' ]; then	
+					if [ "$file" != "$merge_file" ]; then
+						header 'Merging js: '$file' begins' >> $merge_file;		
+						cat $file >> $merge_file;
+					fi
 				fi
 			done
 
