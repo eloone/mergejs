@@ -22,7 +22,7 @@ merge_files () {
 			echo -e '/* Merging order :\n' >> $merge_file;
 			for file in $files
 			do
-				if [ ${file:0:1} != '#' ]; then
+				if [ $(echo $file | head -c 1) != '#' ]; then
 					echo -e '\a- '$file >> $merge_file;
 				fi
 			done
@@ -30,7 +30,7 @@ merge_files () {
 
 			for file in $files
 			do
-				if [ ${file:0:1} != '#' ]; then
+				if [ $(echo $file | head -c 1) != '#' ]; then
 					if [ "$file" != "$merge_file" ]; then
 						header 'Merging js: '$file' begins' >> $merge_file;
 						cat $file >> $merge_file;
