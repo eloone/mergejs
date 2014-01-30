@@ -3,7 +3,7 @@
 header(){
 	separator='\n/*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */\n';
 
-	echo -e '\n'$separator'/* '$1' */'$separator'\n'; 	
+	echo -e '\n'$separator'/* '$1' */'$separator'\n';
 }
 
 merge_files () {
@@ -11,18 +11,18 @@ merge_files () {
 		echo '[ERROR]' $1 'is not a regular file. It must be a text file.';
 	else
 		files=`cat $1`;
-		merge_file=$2;			
+		merge_file=$2;
 
 			if [ -f $merge_file ] ; then
 				rm $merge_file;
 			fi
 
 			header 'Merging js from "'$1'" begins' >> $merge_file;
-			echo -e '/* Last merge :' $(date) ' */\n' >> $merge_file;	
+			echo -e '/* Last merge :' $(date) ' */\n' >> $merge_file;
 			echo -e '/* Merging order :\n' >> $merge_file;
 			for file in $files
 			do
-				if [ ${file:0:1} != '#' ]; then			
+				if [ ${file:0:1} != '#' ]; then
 					echo -e '\a- '$file >> $merge_file;
 				fi
 			done
@@ -30,9 +30,9 @@ merge_files () {
 
 			for file in $files
 			do
-				if [ ${file:0:1} != '#' ]; then	
+				if [ ${file:0:1} != '#' ]; then
 					if [ "$file" != "$merge_file" ]; then
-						header 'Merging js: '$file' begins' >> $merge_file;		
+						header 'Merging js: '$file' begins' >> $merge_file;
 						cat $file >> $merge_file;
 					fi
 				fi
@@ -73,7 +73,5 @@ else
 		compress_file $2 $3;
 	else
 		merge_files $1 $2;
-	fi	
+	fi
 fi
-
-
